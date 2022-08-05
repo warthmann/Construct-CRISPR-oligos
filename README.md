@@ -14,5 +14,7 @@ INPUT file example line:
 sgRNA Name <tab> sgRNA sequence
 
 #usage: perl Design-CRISPR-oligos.pl <INPUT_FILE>
-# by Norman Warthmann, 1.8.2022
+
+
+by Norman Warthmann, 1.8.2022
 
