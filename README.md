@@ -11,7 +11,7 @@ DNA only, but should be robust to all IUPAC code.
 The script will return a list of comma-separated entries. Primer sequences matching the template plasmid are returned in upper case, 5'-overhangs in lower case.
 
 INPUT file example line:
-sgRNA Name <tab> sgRNA sequence
+sgRNA Name \<tab\> sgRNA sequence
 
 #usage: perl Design-CRISPR-oligos.pl <INPUT_FILE>
 

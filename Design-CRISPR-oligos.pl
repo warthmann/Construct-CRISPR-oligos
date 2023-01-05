@@ -26,17 +26,16 @@ while( <INPUT_FILE> ){
 	die "\n**ERROR: the sgRNA sequence of $sgRNA_name is not 20 bp long! (did you strip the PAM?)\n\n"  unless (length($sgRNA_seq) == 20); #20
   #extract the necessary substrings
 	my $first_12 = substr($sgRNA_seq, 0, 12);
-  my $last_12 = substr($sgRNA_seq, -12);
+	my $last_12 = substr($sgRNA_seq, -12);
   # reverse complement DNA (2 steps: reverse and then complement)
-  my $reverse_first_12 = reverse($first_12);
+	my $reverse_first_12 = reverse($first_12);
 	$reverse_first_12 =~ tr/ACTGactgMRVHmrvhKYBDkybd/TGACtgacKYBDkybdMRVHmrvh/;
 
 #concatenate to desired overhangs and print to STDout (comma separated)
-print "\n". $sgRNA_name ."\n";
-print $sgRNA_name ."-". "gRNA1-R" . "," . lc("cgGGTCTCg") ."-". lc($reverse_first_12) . "-" .  uc("TGCACCAGCCGGGAATCGAACCC") . "\n";
-print $sgRNA_name ."-". "gRNA1-F" . "," . lc("cgGGTCTCg") ."-". lc($last_12) . "-" .  uc("GTTTTAGAGCTAGAAATAGCA") . "\n";
-print $sgRNA_name ."-". "In-Vitro-FWD-primer_(A)" . "," . lc("GCGGCCTCTAATACGACTCACTATAGG") ."-". lc($sgRNA_seq) . "-" .  uc("GTTTTAGAGCTAGAAA") . "\n\n";
-
+	print "\n". $sgRNA_name ."\n";
+	print $sgRNA_name ."-". "gRNA1-R" . "," . lc("cgGGTCTCg") ."-". lc($reverse_first_12) . "-" .  uc("TGCACCAGCCGGGAATCGAACCC") . "\n";
+	print $sgRNA_name ."-". "gRNA1-F" . "," . lc("cgGGTCTCg") ."-". lc($last_12) . "-" .  uc("GTTTTAGAGCTAGAAATAGCA") . "\n";
+	print $sgRNA_name ."-". "In-Vitro-FWD-primer_(A)" . "," . lc("GCGGCCTCTAATACGACTCACTATAGG") ."-". lc($sgRNA_seq) . "-" .  uc("GTTTTAGAGCTAGAAA") . "\n\n";
 }
 
 ##PSEUDO-CODE
