@@ -3,7 +3,7 @@
 #provide the sgRNA sequences (without PAM) and a unique name in a tab delimited text file <INPUT_FILE>. Don't include the PAM sequence. The script will check for sequence length of 20 bp and exit with ERROR if different. DNA only, but should be robust to all IUPAC code. The script will return a list of comma-separated entries. Primer sequences matching the template plasmid are returned in upper case, 5'-overhangs in lower case.
 
 #INPUT file example line:
-#sgRNA Name <tab> sgRNA sequence
+#sgRNA Name<tab>sgRNA sequence
 
 #usage: perl Construct-greengate-CRISPR-oligos.pl <INPUT_FILE>
 # by Norman Warthmann, August 1st, 2022
@@ -31,11 +31,16 @@ while( <INPUT_FILE> ){
 	my $reverse_first_12 = reverse($first_12);
 	$reverse_first_12 =~ tr/ACTGactgMRVHmrvhKYBDkybd/TGACtgacKYBDkybdMRVHmrvh/;
 
-#concatenate to desired overhangs and print to STDout (comma separated)
+#concatenate to desired overhangs and print to STDout (comma separated), for easier checking, dash-separated components can be returned (#)
 	print "\n". $sgRNA_name ."\n";
-	print $sgRNA_name ."-". "gRNA1-R" . "," . lc("cgGGTCTCg") ."-". lc($reverse_first_12) . "-" .  uc("TGCACCAGCCGGGAATCGAACCC") . "\n";
-	print $sgRNA_name ."-". "gRNA1-F" . "," . lc("cgGGTCTCg") ."-". lc($last_12) . "-" .  uc("GTTTTAGAGCTAGAAATAGCA") . "\n";
-	print $sgRNA_name ."-". "In-Vitro-FWD-primer_(A)" . "," . lc("GCGGCCTCTAATACGACTCACTATAGG") ."-". lc($sgRNA_seq) . "-" .  uc("GTTTTAGAGCTAGAAA") . "\n\n";
+#	print $sgRNA_name ."-gRNA1-R," . lc("cgGGTCTCg") ."-". lc($reverse_first_12) . "-" .  uc("TGCACCAGCCGGGAATCGAACCC") . "\n";
+	print $sgRNA_name ."-gRNA1-R," . lc("cgGGTCTCg") . lc($reverse_first_12) . uc("TGCACCAGCCGGGAATCGAACCC") . "\n";
+
+#	print $sgRNA_name ."-gRNA1-F," . lc("cgGGTCTCg") ."-". lc($last_12) . "-" .  uc("GTTTTAGAGCTAGAAATAGCA") . "\n";
+	print $sgRNA_name ."-gRNA1-F," . lc("cgGGTCTCg") . lc($last_12) .  uc("GTTTTAGAGCTAGAAATAGCA") . "\n";
+
+#	print $sgRNA_name ."-In-Vitro-FWD-primer_(A)," . lc("GCGGCCTCTAATACGACTCACTATAGG") ."-". lc($sgRNA_seq) . "-" .  uc("GTTTTAGAGCTAGAAA") . "\n\n";
+	print $sgRNA_name ."-In-Vitro-FWD-primer_(A)," . lc("GCGGCCTCTAATACGACTCACTATAGG") . lc($sgRNA_seq) . uc("GTTTTAGAGCTAGAAA") . "\n\n";
 }
 
 ##PSEUDO-CODE
